@@ -1,0 +1,15 @@
+{
+  "name": "books-catalog-api",
+  "version": "1.0.0",
+  "description": "package for books catalog api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.455.0",
+    "claudia-api-builder": "^4.1.2"
+  }
+}
