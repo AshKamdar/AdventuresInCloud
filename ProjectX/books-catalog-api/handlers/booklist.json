@@ -1,30 +1,26 @@
 [
   {
     "id": 1,
-    "name": "Capricciosa",
-    "ingredients": [
-      "tomato sauce", "mozzarella", "mushrooms", "ham", "olives"
-    ]
+    "name": "A Game of Thrones",
+    "author": "George R. R. Martin",
+    "price": "19.99"
   },
   {
     "id": 2,
-    "name": "Quattro Formaggi",
-    "ingredients": [
-      "tomato sauce", "mozzarella", "parmesan cheese", "blue cheese", "goat cheese"
-    ]
+    "name": "Where the Crawdads Sing",
+    "author": "J.K. Rowling, Mary GrandPré",
+    "price": "16.93"
   },
   {
     "id": 3,
-    "name": "Napoletana",
-    "ingredients": [
-      "tomato sauce", "anchovies", "olives", "capers"
-    ]
+    "name": "Harry Potter and the Order of the Phoenix",
+    "author": "George R. R. Martin",
+    "price": "19.99"
   },
   {
     "id": 4,
-    "name": "Margherita",
-    "ingredients": [
-      "tomato sauce", "mozzarella"
-    ]
+    "name": "Redemption",
+    "author": "David Baldacci",
+    "price": "12.27"
   }
 ]
