@@ -1,21 +1,22 @@
 'use strict'
 
-const booklist = require('../handlers/booklist.json')
-
+const AWS = require('aws-sdk')
+const docClient = new AWS.DynamoDB.DocumentClient()
 
 function getBooks(bookid) {
+  if (typeof bookid === 'undefined')
+    return docClient.scan({
+      TableName: 'books'
+    }).promise()
+      .then(result => result.Items)
 
-  if (!bookid)
-    return booklist;
-
-  const book = booklist.find((book) => {
-    return book.id == bookid
-  })
-
-  if (book)
-    return book
-
-  throw new Error('The book you requested was not found')
+  return docClient.get({
+    TableName: 'books',
+    Key: {
+      id: bookid
+    }
+  }).promise()
+    .then(result => result.Item)
 }
 
 module.exports = getBooks
