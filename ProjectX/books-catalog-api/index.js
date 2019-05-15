@@ -39,6 +39,7 @@ booksApi.post('/bookadd', (request) => {
   error: 400
 })
 
+
 //DeleteBook route
 booksApi.delete('/bookdelete/{id}', (request) => {
   return deleteBook(request.pathParams.id)
@@ -49,7 +50,7 @@ booksApi.delete('/bookdelete/{id}', (request) => {
 
 //UpdateBook route
 booksApi.put('/bookupdate/{id}', (request) => {
-  return updateBook(request.pathParams.id)
+  return updateBook(request.pathParams.id, request.body)
 }, {
   success: 201,
   error: 400
