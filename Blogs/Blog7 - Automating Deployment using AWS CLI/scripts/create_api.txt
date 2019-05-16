@@ -32,7 +32,7 @@ aws apigateway put-integration \
     --http-method GET \
     --type AWS \
     --integration-http-method GET \
-    --uri arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:180449592027:function:myFullName/invocations \
+    --uri arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:1234567890:function:myFullName/invocations \
     --region us-east-1
 				
 aws apigateway put-integration-response \

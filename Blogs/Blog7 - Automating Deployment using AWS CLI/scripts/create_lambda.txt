@@ -5,7 +5,7 @@ aws lambda create-function --function-name myFullName \
 	--zip-file fileb://function.zip \
 	--handler index.handler \
 	--runtime nodejs8.10 \
-	--role arn:aws:iam::180449592027:role/test_lambda_iam_role
+	--role arn:aws:iam::1234567890:role/test_lambda_iam_role
 
 aws lambda invoke --function-name myFullName \
 	--payload '{"firstName":"Jason", "lastName":"Bourne"}' \

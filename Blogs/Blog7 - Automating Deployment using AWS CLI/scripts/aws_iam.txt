@@ -11,5 +11,5 @@ aws iam create-role \
 
 aws iam attach-role-policy \
     --role-name test_lambda_iam_role \
-    --policy-arn arn:aws:iam::180449592027:policy/test_lambda_iam_policy \
+    --policy-arn arn:aws:iam::1234567890:policy/test_lambda_iam_policy \
     --region us-east-1
