@@ -1,0 +1,15 @@
+aws iam create-policy \
+    --policy-name test_lambda_iam_policy \
+    --policy-document file://cloudwatch_permissions.txt \
+    --region us-east-1
+    
+
+aws iam create-role \
+    --role-name test_lambda_iam_role \
+    --assume-role-policy-document file://lambda_role_trust.txt \
+    --region us-east-1 
+
+aws iam attach-role-policy \
+    --role-name test_lambda_iam_role \
+    --policy-arn arn:aws:iam::180449592027:policy/test_lambda_iam_policy \
+    --region us-east-1

@@ -1,0 +1,19 @@
+//Delete API
+aws apigateway delete-rest-api \
+    --rest-api-id 9dykwxbb88
+    
+//Delete Lambda function
+aws lambda delete-function \
+	--function-name myFullName
+
+//Delete Policy and Role
+aws iam detach-role-policy \
+	--role-name test_lambda_iam_role \
+	--policy-arn arn:aws:iam::180449592027:policy/test_lambda_iam_policy
+	
+aws iam delete-role \
+	--role-name test_lambda_iam_role
+
+aws iam delete-policy \
+	--policy-arn arn:aws:iam::180449592027:policy/test_lambda_iam_policy
+	

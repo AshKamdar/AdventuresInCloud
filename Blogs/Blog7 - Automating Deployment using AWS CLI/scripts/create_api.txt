@@ -1,0 +1,50 @@
+aws apigateway create-rest-api \
+    --name 'fullname-api' \
+    --region us-east-1
+
+aws apigateway get-resources \
+    --rest-api-id 9dykwxbb88 \
+	--region us-east-1
+
+aws apigateway create-resource \
+    --rest-api-id 9dykwxbb88 \
+    --region us-east-1 \
+    --parent-id f3h77aa5u2 \
+    --path-part fullname
+	  
+aws apigateway put-method \
+    --rest-api-id 9dykwxbb88 \
+    --resource-id hutcsi \
+    --http-method GET \
+    --authorization-type "NONE" \
+    --region us-east-1
+	   
+aws apigateway put-method-response \
+    --rest-api-id 9dykwxbb88 \
+    --resource-id hutcsi \
+    --http-method GET \
+    --status-code 200  \
+    --region us-east-1
+	   
+aws apigateway put-integration \
+    --rest-api-id 9dykwxbb88 \
+    --resource-id hutcsi \
+    --http-method GET \
+    --type AWS \
+    --integration-http-method GET \
+    --uri arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:180449592027:function:myFullName/invocations \
+    --region us-east-1
+				
+aws apigateway put-integration-response \
+    --rest-api-id 9dykwxbb88 \
+    --resource-id hutcsi --http-method GET \
+    --status-code 200 --selection-pattern ""  \
+    --region us-east-1
+	   
+aws apigateway create-deployment \
+    --rest-api-id 9dykwxbb88 \
+    --region us-east-1 \
+    --stage-name test \
+    --stage-description 'Test stage' \
+    --description 'First deployment'
+
