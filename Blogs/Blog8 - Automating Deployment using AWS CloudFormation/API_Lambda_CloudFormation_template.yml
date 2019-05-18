@@ -1,0 +1,111 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Deploy API and Lambda using AWS CloudFormation
+Resources:
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Policies:
+      - PolicyName: 'lambda-cloudwatch-policy'
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+            Resource: arn:aws:logs:*:*:*
+      Path: "/"
+      RoleName: "lambda-cloudwatch-role"
+  MyLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: |
+          exports.handler = (event, context, callback) => {
+              callback(null, "id:1, name:A Game of Thrones, author:George R. R. Martin, price:19.99");
+          };
+      FunctionName: 'getBookByISBN'
+      Handler: index.handler
+      MemorySize: 512
+      Role:
+        Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+      Runtime: nodejs8.10
+      Timeout: 15
+    DependsOn:
+    - LambdaExecutionRole
+  
+  MyBooksAPI:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: books-api
+      Description: API for books
+      FailOnWarnings: true
+
+  getBookResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      RestApiId: !Ref MyBooksAPI
+      ParentId: !GetAtt MyBooksAPI.RootResourceId
+      PathPart: 'getbook'
+
+  NamePathParamResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      RestApiId: !Ref MyBooksAPI
+      ParentId: !Ref getBookResource
+      PathPart: '{isbn}'
+  MyGETMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: GET
+      Integration:
+        Type: AWS
+        IntegrationHttpMethod: POST
+        IntegrationResponses:
+        - StatusCode: 200
+        Uri:
+          !Sub
+            - 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:${AWS::AccountId}:function:${Lambda_Function}/invocations'
+            - Lambda_Function: !Ref MyLambdaFunction
+
+      ResourceId: !Ref NamePathParamResource
+      RestApiId: !Ref MyBooksAPI
+      MethodResponses:
+      - StatusCode: 200
+  MyDeployment:
+    DependsOn: MyGETMethod
+    Type: AWS::ApiGateway::Deployment
+    Properties:
+      Description: '1st Deployment'
+      RestApiId: !Ref MyBooksAPI
+      StageDescription:
+        Description: 'Dev Stage'
+      StageName: 'dev'
+  LambdaInvokePermissionForAPI:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref MyLambdaFunction
+      Action: 'lambda:InvokeFunction'
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub
+         - arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${API_ID}/*/GET/getbook/{isbn}
+         - API_ID: !Ref MyBooksAPI
+Outputs:
+  BookAPIEndpoint:
+    Description: 'Endpoint for Book API'
+    Value: !Sub
+        - https://${API_ID}.execute-api.${AWS::Region}.amazonaws.com/dev/getbook/isbn123
+        - API_ID: !Ref MyBooksAPI

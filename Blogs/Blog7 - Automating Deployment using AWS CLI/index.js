@@ -1,4 +1,6 @@
 exports.handler = (event, context, callback) => {
-    var result = "Your Full Name is " + event.firstName + " " + event.lastName;
+    console.log("Entering function myFullName");
+    var result = "Hello from inside.";
     callback(null, result);
+    console.log("Leaving function myFullName");
 };
