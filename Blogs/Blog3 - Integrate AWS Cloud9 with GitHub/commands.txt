@@ -1,0 +1,22 @@
+//Check if git is installed
+git --version
+
+Set your Git UserName and EmailAddress by running below commands
+git config --global user.name "AshKamdar"
+git config --global user.email "ash.tsys@gmail.com"
+
+
+//Clone git repo
+git clone https://github.com/AshKamdar/AdventuresInCloud.git
+
+//Check status
+git status
+
+//Add file to localgit repo
+git add --all
+
+//Commit adding of file to local repo
+git commit -m “Added a new file named testing.txt in Cloud9 IDE.”
+
+//Pull contents from GitHub repository to local repo
+git pull
