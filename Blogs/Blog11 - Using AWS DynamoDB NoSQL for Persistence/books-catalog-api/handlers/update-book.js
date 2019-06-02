@@ -9,7 +9,7 @@ function updateBook(id, book) {
 
     return docClient.update({
             TableName: 'books',
-            Key: { // <3>
+            Key: {
                 id: id
             },
             UpdateExpression: 'set author=:a, price = :p',
