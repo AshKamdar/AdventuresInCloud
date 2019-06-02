@@ -8,7 +8,7 @@ function updateBook(id, book) {
         throw new Error('Book Id is required to update')
 
     return docClient.update({
-            TableName: 'books',
+            TableName: 'books-catalog',
             Key: {
                 id: id
             },

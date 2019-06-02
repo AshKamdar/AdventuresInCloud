@@ -6,12 +6,12 @@ const docClient = new AWS.DynamoDB.DocumentClient()
 function getBooks(bookid) {
   if (typeof bookid === 'undefined')
     return docClient.scan({
-      TableName: 'books'
+      TableName: 'books-catalog'
     }).promise()
       .then(result => result.Items)
 
   return docClient.get({
-    TableName: 'books',
+    TableName: 'books-catalog',
     Key: {
       id: bookid
     }

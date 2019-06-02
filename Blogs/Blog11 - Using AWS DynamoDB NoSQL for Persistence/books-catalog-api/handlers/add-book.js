@@ -7,7 +7,7 @@ function addBook(book) {
     if (!book || !book.id || !book.name)
         throw new Error('Please provide Id and Name for hte book ')
             return docClient.put({
-                    TableName: 'books',
+                    TableName: 'books-catalog',
                     Item: {
                         id: book.id,
                         name: book.name,

@@ -5,7 +5,7 @@ const docClient = new AWS.DynamoDB.DocumentClient()
 
 function deleteBook(bookId) {
     return docClient.delete({
-            TableName: 'books',
+            TableName: 'books-catalog',
             Key: {
                 id: bookId
             }
