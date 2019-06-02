@@ -1,0 +1,2 @@
+# Don't track content of these folders
+books-catalog-api/node_modules/
