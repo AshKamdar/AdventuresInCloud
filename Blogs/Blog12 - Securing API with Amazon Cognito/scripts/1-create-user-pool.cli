@@ -1,5 +1,0 @@
-aws cognito-idp create-user-pool \
-    --cli-input-json file://1-create-user-pool.json
-    
-
-    
