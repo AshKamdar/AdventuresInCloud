@@ -1,12 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Implementing REST API for book catalog
-
 Globals:
   Function:
     Runtime: nodejs8.10
     Timeout: 60
-
 Resources:
   BooksCatalogApi:
     Type: AWS::Serverless::Api
@@ -14,16 +12,15 @@ Resources:
       Name: book-catalog-api
       StageName: dev
       DefinitionBody:
-          Fn::Transform:
-            Name: AWS::Include
-            Parameters:
-              Location: swagger-integrated.yaml
-
+        Fn::Transform:
+          Name: AWS::Include
+          Parameters:
+            Location: s3://aws-sam-deployment/ca29df96ae4cd39cf00eb9aaaedb51c0
   GetAllBooksFunction:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: book-catalog-getAllBooks
-      CodeUri: src/
+      CodeUri: s3://aws-sam-deployment/f3b802db7852915f077b0392c733cb2d
       Handler: index.getAllBooks
       Policies:
         DynamoDBReadPolicy:
@@ -41,12 +38,11 @@ Resources:
               Ref: BooksCatalogApi
             Path: /
             Method: GET
-
   AddBookFunction:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: book-catalog-addBook
-      CodeUri: src/
+      CodeUri: s3://aws-sam-deployment/f3b802db7852915f077b0392c733cb2d
       Handler: index.addBook
       Policies:
         DynamoDBCrudPolicy:
@@ -64,12 +60,11 @@ Resources:
               Ref: BooksCatalogApi
             Path: /
             Method: POST
-
   GetBookFunction:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: book-catalog-getBook
-      CodeUri: src/
+      CodeUri: s3://aws-sam-deployment/f3b802db7852915f077b0392c733cb2d
       Handler: index.getBook
       Policies:
         DynamoDBReadPolicy:
@@ -87,12 +82,11 @@ Resources:
               Ref: BooksCatalogApi
             Path: /{id}
             Method: GET
-
   UpdateBookFunction:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: book-catalog-updateBook
-      CodeUri: src/
+      CodeUri: s3://aws-sam-deployment/f3b802db7852915f077b0392c733cb2d
       Handler: index.updateBook
       Policies:
         DynamoDBCrudPolicy:
@@ -110,12 +104,11 @@ Resources:
               Ref: BooksCatalogApi
             Path: /{id}
             Method: PUT
-
   DeleteBookFunction:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: book-catalog-deleteBook
-      CodeUri: src/
+      CodeUri: s3://aws-sam-deployment/f3b802db7852915f077b0392c733cb2d
       Handler: index.deleteBook
       Policies:
         DynamoDBCrudPolicy:
@@ -133,7 +126,6 @@ Resources:
               Ref: BooksCatalogApi
             Path: /{id}
             Method: DELETE
-
   BooksTable:
     Type: AWS::Serverless::SimpleTable
     Properties:

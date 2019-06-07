@@ -1,0 +1,14 @@
+{
+  "name": "books-catalog-api",
+  "version": "1.0.0",
+  "description": "package for REST API implementation of books catalog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "uuid": "^3.3.2"
+  }
+}
