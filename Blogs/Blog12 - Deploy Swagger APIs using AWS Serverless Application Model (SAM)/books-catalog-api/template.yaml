@@ -1,7 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: >
-    Implementing REST API for book catalog.
+Description: Implementing REST API for book catalog
 
 Globals:
   Function:
@@ -9,24 +8,23 @@ Globals:
     Timeout: 60
 
 Resources:
-  RestApi:
+  BooksCatalogApi:
     Type: AWS::Serverless::Api
     Properties:
-      Name:
-        Fn::Sub: book-catalog-api
+      Name: book-catalog-api
+      StageName: dev
       DefinitionBody:
           Fn::Transform:
             Name: AWS::Include
             Parameters:
               Location: swagger.yaml
 
-  GetBooksFunction:
+  GetAllBooksFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName:
-        Fn::Sub: book-catalog-get-books
+      FunctionName: book-catalog-getAllBooks
       CodeUri: src/
-      Handler: index.getBooks
+      Handler: index.getAllBooks
       Policies:
         DynamoDBReadPolicy:
           TableName:
@@ -40,15 +38,14 @@ Resources:
           Type: Api
           Properties:
             RestApiId:
-              Ref: RestApi
+              Ref: BooksCatalogApi
             Path: /
             Method: GET
 
   AddBookFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName:
-        Fn::Sub: book-catalog-add-book
+      FunctionName: book-catalog-addBook
       CodeUri: src/
       Handler: index.addBook
       Policies:
@@ -64,15 +61,14 @@ Resources:
           Type: Api
           Properties:
             RestApiId:
-              Ref: RestApi
+              Ref: BooksCatalogApi
             Path: /
             Method: POST
 
   GetBookFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName:
-        Fn::Sub: book-catalog-get-book
+      FunctionName: book-catalog-getBook
       CodeUri: src/
       Handler: index.getBook
       Policies:
@@ -88,15 +84,14 @@ Resources:
           Type: Api
           Properties:
             RestApiId:
-              Ref: RestApi
+              Ref: BooksCatalogApi
             Path: /{id}
             Method: GET
 
   UpdateBookFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName:
-        Fn::Sub: book-catalog-update-book
+      FunctionName: book-catalog-updateBook
       CodeUri: src/
       Handler: index.updateBook
       Policies:
@@ -112,15 +107,14 @@ Resources:
           Type: Api
           Properties:
             RestApiId:
-              Ref: RestApi
+              Ref: BooksCatalogApi
             Path: /{id}
             Method: PUT
 
   DeleteBookFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName:
-        Fn::Sub: book-catalog-delete-book
+      FunctionName: book-catalog-deleteBook
       CodeUri: src/
       Handler: index.deleteBook
       Policies:
@@ -136,15 +130,14 @@ Resources:
           Type: Api
           Properties:
             RestApiId:
-              Ref: RestApi
+              Ref: BooksCatalogApi
             Path: /{id}
             Method: DELETE
 
   BooksTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
-      TableName:
-        Fn::Sub: book-catalog
+      TableName: books-catalog
       PrimaryKey:
         Name: id
         Type: String

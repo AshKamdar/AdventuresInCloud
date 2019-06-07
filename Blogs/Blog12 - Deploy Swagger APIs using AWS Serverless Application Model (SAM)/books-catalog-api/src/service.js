@@ -41,7 +41,7 @@ exports.getBook = async (id) => {
   }
 };
 
-exports.listBooks = async () => {
+exports.getAllBooks = async () => {
   const params = {
     TableName: BooksCatalogTableName
   };

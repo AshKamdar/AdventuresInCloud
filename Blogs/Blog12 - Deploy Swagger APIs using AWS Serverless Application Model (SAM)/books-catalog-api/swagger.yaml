@@ -5,7 +5,7 @@ info:
 paths:
   /:
     get:
-      summary: Get books
+      summary: Get all books
       description: Returns list of books
       responses:
         200:
@@ -21,7 +21,7 @@ paths:
           content: {}
       x-amazon-apigateway-integration:
         uri:
-          Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetBooksFunction.Arn}/invocations
+          Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetAllBooksFunction.Arn}/invocations
         responses:
           default:
             statusCode: "200"
