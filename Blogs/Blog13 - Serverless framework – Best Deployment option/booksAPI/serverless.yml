@@ -3,6 +3,7 @@ service: booksAPI
 provider:
   name: aws
   runtime: nodejs8.10
+  stage: dev
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
   iamRoleStatements:
@@ -59,7 +60,7 @@ functions:
 
 resources:
   Resources:
-    TodosDynamoDbTable:
+    BooksDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       Properties:
         AttributeDefinitions:

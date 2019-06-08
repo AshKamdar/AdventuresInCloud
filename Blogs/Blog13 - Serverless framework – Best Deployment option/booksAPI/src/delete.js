@@ -27,7 +27,7 @@ module.exports.delete = (event, context, callback) => {
         // create a response
         const response = {
             statusCode: 200,
-            body: JSON.stringify({'Book has been deleted'}),
+            body: 'Book has been deleted',
         };
         callback(null, response);
     });
