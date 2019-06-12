@@ -1,0 +1,6 @@
+
+# REST API Body Payload:
+
+{ "name": "Game of thrones", "price": "15.99", "author": "George R R Martin" }
+{ "name": "Redemption", "price": "12.27", "author": "David Baldacci" }
+

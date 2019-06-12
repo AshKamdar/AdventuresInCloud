@@ -1,0 +1,15 @@
+# Initialize project
+npm init
+
+# Install Serverless framework
+npm install -g serverless
+
+# Install Express framework
+npm install –save express
+
+# Deploy project using serverless framework
+
+sls deploy
+sls deploy -v
+
+

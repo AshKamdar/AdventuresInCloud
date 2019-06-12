@@ -18,11 +18,6 @@ sam deploy \
 --capabilities CAPABILITY_IAM \
 --region us-east-1
 
-Payload:
-
-{ "name": "Game of thrones", "price": "15.99", "author": "George R R Martin" }
-{ "name": "Redemption", "price": "12.27", "author": "David Baldacci" }
-
 
 
 
