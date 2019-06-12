@@ -1,0 +1,101 @@
+service: booksAPI
+
+custom:
+  stage: ${opt:stage, 'dev'}
+  stage_settings: ${file(stages/${self:custom.stage}.yml)}
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: ${opt:region, 'us-east-1'}
+  stackName: ${self:service}-${self:custom.stage}-stack
+  apiName: ${self:service}-${self:custom.stage}
+  environment:
+    STAGE: ${self:custom.stage}
+    DYNAMODB_TABLE: ${self:service}-${self:custom.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        "Fn::Join":
+          - ""
+          -
+            - "arn:aws:dynamodb:"
+            - Ref: "AWS::Region"
+            - ":"
+            - Ref: "AWS::AccountId"
+            - ":table/"
+            - Ref: BooksTable
+
+functions:
+  bookCreate:
+    handler: src/create.handler
+    name: ${self:service}-Create
+    description: Adds book to catalog
+    events:
+      - http:
+          path: books
+          method: post
+          cors: true
+
+  booksList:
+    handler: src/list.handler
+    name: ${self:service}-List
+    description: Get all books from catalog
+    events:
+      - http:
+          path: books
+          method: get
+          cors: true
+
+  bookGet:
+    handler: src/get.handler
+    name: ${self:service}-Get
+    description: Gets a book from catalog
+    events:
+      - http:
+          path: books/{id}
+          method: get
+          cors: true
+
+  bookUpdate:
+    handler: src/update.handler
+    name: ${self:service}-Update
+    description: Updates a book in catalog
+    events:
+      - http:
+          path: books/{id}
+          method: put
+          cors: true
+
+  bookDelete:
+    handler: src/delete.handler
+    name: ${self:service}-Delete
+    description: Deletes a book from catalog
+    events:
+      - http:
+          path: books/{id}
+          method: delete
+          cors: true
+
+resources:
+  Resources:
+    BooksTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput: ${self:custom.stage_settings.DynamoCapacity}
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}

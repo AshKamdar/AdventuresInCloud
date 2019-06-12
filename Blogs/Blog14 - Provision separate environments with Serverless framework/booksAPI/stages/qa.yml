@@ -1,0 +1,3 @@
+DynamoCapacity:
+    ReadCapacityUnits: 2
+    WriteCapacityUnits: 2
