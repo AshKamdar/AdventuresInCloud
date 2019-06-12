@@ -1,3 +1,5 @@
 DynamoCapacity:
     ReadCapacityUnits: 5
     WriteCapacityUnits: 5
+    
+LambdaMemorySize: 1024

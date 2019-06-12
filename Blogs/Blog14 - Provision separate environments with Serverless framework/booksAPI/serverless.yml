@@ -36,8 +36,9 @@ provider:
 functions:
   bookCreate:
     handler: src/create.handler
-    name: ${self:service}-Create
+    name: ${self:service}-Create-${self:custom.stage}
     description: Adds book to catalog
+    memorySize: ${self:custom.stage_settings.LambdaMemorySize}
     events:
       - http:
           path: books
@@ -46,8 +47,9 @@ functions:
 
   booksList:
     handler: src/list.handler
-    name: ${self:service}-List
+    name: ${self:service}-List-${self:custom.stage}
     description: Get all books from catalog
+    memorySize: ${self:custom.stage_settings.LambdaMemorySize}
     events:
       - http:
           path: books
@@ -56,8 +58,9 @@ functions:
 
   bookGet:
     handler: src/get.handler
-    name: ${self:service}-Get
+    name: ${self:service}-Get-${self:custom.stage}
     description: Gets a book from catalog
+    memorySize: ${self:custom.stage_settings.LambdaMemorySize}
     events:
       - http:
           path: books/{id}
@@ -66,8 +69,9 @@ functions:
 
   bookUpdate:
     handler: src/update.handler
-    name: ${self:service}-Update
+    name: ${self:service}-Update-${self:custom.stage}
     description: Updates a book in catalog
+    memorySize: ${self:custom.stage_settings.LambdaMemorySize}
     events:
       - http:
           path: books/{id}
@@ -76,8 +80,9 @@ functions:
 
   bookDelete:
     handler: src/delete.handler
-    name: ${self:service}-Delete
+    name: ${self:service}-Delete-${self:custom.stage}
     description: Deletes a book from catalog
+    memorySize: ${self:custom.stage_settings.LambdaMemorySize}
     events:
       - http:
           path: books/{id}
