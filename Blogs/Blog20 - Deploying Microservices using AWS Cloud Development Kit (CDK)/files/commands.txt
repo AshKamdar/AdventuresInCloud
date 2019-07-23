@@ -1,0 +1,19 @@
+npm install -g aws-cdk
+
+cdk --version
+
+cdk init --language javascript
+
+cdk synth
+
+cdk bootstrap
+
+cdk deploy
+
+
+npm install --save @aws-cdk/aws-dynamodb
+
+npm install --save @aws-cdk/aws-lambda
+npm install --save @aws-cdk/aws-apigateway
+npm install --save @aws-cdk/aws-iam
+
