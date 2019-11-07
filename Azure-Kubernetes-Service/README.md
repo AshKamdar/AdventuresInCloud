@@ -4,5 +4,5 @@ Azure offers hosted kubernetes service wherein it manages  kubernetes master nod
 
 __Master nodes__ are also referred called __Control Plane__ of Kubernetes and __Worker nodes__ are referred to as __Data plane__ of kubernetes.
 
-This _hosted offering_ reduces much of the complexity and operational overhead of managing kubernetes control plane and keeping it running in a high available and secure environment setup. Azure takes care of critical tasks like health monitoring and maintenance for us in the event of any issues encountered while running kubernetes clusters.
+This _hosted offering_ reduces much of the complexity and operational overhead of managing kubernetes control plane and keeping it running in a high available and secure environment. Azure also takes care of critical tasks like health monitoring and maintenance for us in the event of any issues encountered while running kubernetes clusters.
 
