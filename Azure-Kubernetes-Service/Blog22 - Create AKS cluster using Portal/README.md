@@ -3,8 +3,12 @@
 #### Create Resource Group
 <kbd>![Resource Group](./images/1-create-rg.JPG)</kbd>
 
+#### Create Resource Group
+> ![Resource Group](./images/1-create-rg.JPG)
+
+
 #### Create Log Analytics Workspace
-> ![LogAnalyticsWorkspace](./images/2-create-log-analytics-workspace.JPG)
+![LogAnalyticsWorkspace](./images/2-create-log-analytics-workspace.JPG)
 
 ![ServicePrincipal](./images/3.1-create-service-principal.JPG)
 ![ServicePrincipal](./images/3.2-create-service-principal.JPG)
