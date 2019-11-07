@@ -1,7 +1,9 @@
 # Create AKS cluster using Azure Portal
 
-![Resource Group](./images/1-create-rg.JPG)
+#### Create Resource Group
+<kbd>![Resource Group](./images/1-create-rg.JPG)</kbd>
 
+#### Create Log Analytics Workspace
 ![LogAnalyticsWorkspace](./images/2-create-log-analytics-workspace.JPG)
 
 ![ServicePrincipal](./images/3.1-create-service-principal.JPG)
